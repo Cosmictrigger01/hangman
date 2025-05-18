@@ -23,7 +23,7 @@ def is_solved(known_chars):
     return True
 
 def mainloop():
-    wordlist = ["apple", "banana", "tornado", "shark", "golfball", "gocart"]
+    wordlist = ["pineapple", "mountain", "science", "goat", "newspaper", "highway", "extraterrestrial"]
     
     dif = {
         "easy": 3,
@@ -45,6 +45,14 @@ def mainloop():
     
     already_tried = []
     while True:
+
+        if guesses == 0:
+            print(f"Oh no you used up all your guesses, the correct word was {word}")
+            break
+        elif is_solved(known_chars):
+            print(f"Congrats, you solved it! The correct word is {word}")
+            break
+
         hangman_display(word, known_chars)
 
         guess = input("Please guess a character!: ").lower()
@@ -58,12 +66,6 @@ def mainloop():
                     known_chars[i] = 1
         else:
             guesses -= 1
-        
-        if guesses == 0:
-            print(f"Oh no you used up all your guessed, the correct word was {word}")
-            break
-        elif is_solved(known_chars):
-            print(f"Congrats, you solved it! The correct word is {word}")
-            break
+            print(f"Char not found in word! {guesses} tries left!")
 
 mainloop()
